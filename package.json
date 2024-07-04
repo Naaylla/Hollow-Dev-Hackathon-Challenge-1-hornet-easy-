@@ -1,0 +1,19 @@
+{
+  "name": "hollow-dev-challenge-hornet",
+  "version": "1.0.0",
+  "description": "Solving the first challenge (hornet) (easy)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Naaylla/Hollow-Dev-Hackathon-Challenge-1-hornet-easy-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Naaylla/Hollow-Dev-Hackathon-Challenge-1-hornet-easy-/issues"
+  },
+  "homepage": "https://github.com/Naaylla/Hollow-Dev-Hackathon-Challenge-1-hornet-easy-#readme"
+}
