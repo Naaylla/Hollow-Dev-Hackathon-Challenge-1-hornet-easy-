@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
 
 const fileSchema = new mongoose.Schema({
-    name: String,
-    path: String,
-    size: Number,
-    uploadDate: { type: Date, default: Date.now }
+    _id: mongoose.Schema.Types.ObjectId,
+    name: { type: String, required: true },
+    data: { type: Buffer },
+    size: { type: Number, required: true },
+    encoding: { type: String, required: true },
+    tempFilePath: { type: String, default: '' },
+    truncated: { type: Boolean, required: true },
+    mimetype: { type: String, required: true },
+    md5: { type: String, required: true }
 });
 
-const File = mongoose.model('File', fileSchema);
+const fileModel = mongoose.model('File', fileSchema);
+
+module.exports = fileModel;

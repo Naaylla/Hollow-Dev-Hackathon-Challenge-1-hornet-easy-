@@ -1,5 +1,5 @@
 function payLoadsExist(request, response, next) {
-    if (!request.files) return response.json({ status: "error", message: "Missing Files" })
+    if (!request.files) return response.json({ status: "error", message: "No file selected." })
     next()
 }
 
