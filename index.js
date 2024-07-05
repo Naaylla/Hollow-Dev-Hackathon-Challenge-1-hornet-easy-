@@ -18,18 +18,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (request, response) => {
+app.get("/upload", (request, response) => {
     response.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post('/upload',
+app.post("/upload",
     fileUpload({ createParentPath: true }),
     filesPayloadExists,
     fileExtLimiter(['.png', '.jpg', '.jpeg', '.pdf', '.docx', '.mp4']),
     fileSizeLimiter,
     async (req, res) => {
         const files = req.files;
-        const fileInfos = await Promise.all(Object.keys(files).map(async (key) => {
+        (Object.keys(files).map(async (key) => {
             const filepath = path.join(__dirname, 'files', files[key].name);
 
             await files[key].mv(filepath);
@@ -55,6 +55,43 @@ app.post('/upload',
         return res.json({ status: 'Uploaded succesfully', message: Object.keys(files).toString() })
     }
 );
+
+
+// retrieve info by id (the info is in the db)
+app.get("/downloadInfo/:id", async function (request, reponse) {
+    const { id } = request.params;
+
+})
+
+
+// update file info 
+
+app.post("/update", function (request, response) {
+    reponse.json("Update your file by citing /update/:id") // make this meaningful
+})
+app.put("/update", async function (request, reponse) {
+    const { id } = request.params;
+    const fileInfo = await fileModel.findByIdAndUpdate(id, request.body)
+    if (!fileInfo) {
+        return res.status(404).json({ message: "File does not exist" })
+    }
+
+    const updatedFileInfo = await fileModel.findById(id);
+    res.status(200).json(`File Info updated succesfully ${id}`);
+})
+
+
+// retrieve file by id
+
+app.get("/donwloadInfo")
+
+
+// delete file by id
+
+app.delete("/delete/:id", async function (request, response) {
+    const { id } = request.params;
+
+})
 
 const PORT = 5000;
 
