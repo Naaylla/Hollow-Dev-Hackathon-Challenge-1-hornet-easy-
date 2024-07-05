@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const fileSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: { type: String, required: true },
-    data: { type: Buffer },
     size: { type: Number, required: true },
     encoding: { type: String, required: true },
     tempFilePath: { type: String, default: '' },
