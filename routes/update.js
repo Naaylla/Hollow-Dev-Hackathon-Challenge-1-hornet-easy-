@@ -28,27 +28,18 @@ router.get("/", (request, response) => {
 
 router.put("/:id", async (request, response) => {
     try {
-        const { id } = request.params;
-        const updateFields = { ...request.body };
+        const { id } = req.params;
 
-        // Remove sensitive fields that shouldn't be updated
-        delete updateFields.__v;
-        delete updateFields.truncated;
-        delete updateFields.tempFilePath;
-        delete updateFields.size;
+        const file = await fileModel.findByIdAndUpdate(id, req.body);
 
-        const updatedFile = await fileModel.findByIdAndUpdate(id, updateFields, { new: true });
-
-        if (!updatedFile) {
-            return response.status(404).json({ message: "File does not exist." });
+        if (!file) {
+            return res.status(404).json({ message: "file not found" });
         }
 
-        const file = await fileModel.findById(id);
-
-        response.status(200).json(file);
-
+        const updatedFile = await file.findById(id);
+        res.status(200).json(updatedFile);
     } catch (error) {
-        response.status(500).json({ message: error.message });
+        res.status(500).json({ messege: error.message });
     }
 });
 
