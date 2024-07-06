@@ -4,8 +4,8 @@ const fileModel = require('../models/fileModel');
 
 const router = express.Router();
 
-router.post("/info/", (request, response) => {
-    response.json("To retrieve your file, please specify the ID in the path as follows: /info/:id");
+router.get("/", (request, response) => {
+    response.json("To retrieve your file or you file informations, please specify the ID in the path as follows: download/info/:id or download/file/:id");
 });
 
 router.get("/info/:id", async (request, response) => {

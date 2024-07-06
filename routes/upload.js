@@ -9,6 +9,10 @@ const fileSizeLimiter = require('../middleware/fileSizeLimiter');
 
 const router = express.Router();
 
+router.get("/", (request, response) => {
+    response.sendFile(path.join(__dirname, "..", "index.html"));
+});
+
 router.post("/",
     fileUpload({ createParentPath: true }),
     filesPayloadExists,
