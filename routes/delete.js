@@ -5,7 +5,11 @@ const fileModel = require('../models/fileModel');
 
 const router = express.Router();
 
-router.delete("/file/:id", async (request, response) => {
+router.get("/", (request, response) => {
+    response.json("To delete your file, please use a postman or an alternative, specify the ID in the path as follows: delete/:id");
+});
+
+router.delete("/:id", async (request, response) => {
     try {
         const file = await fileModel.findById(request.params.id);
         if (!file) {
@@ -19,7 +23,7 @@ router.delete("/file/:id", async (request, response) => {
             }
 
             await fileModel.findByIdAndDelete(request.params.id);
-            response.send('File deleted successfully');
+            response.json('File deleted successfully');
         });
     } catch (error) {
         response.status(500).send('Server error');
