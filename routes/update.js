@@ -27,16 +27,16 @@ router.get("/", (request, response) => {
 
 router.put("/:id", async (request, response) => {
   try {
-    const { id } = req.params;
+    const { id } = request.params;
 
-    const file = await fileModel.findByIdAndUpdate(id, req.body);
+    const file = await fileModel.findByIdAndUpdate(id, request.body);
 
     if (!file) {
-      return res.status(404).json({ message: "file not found" });
+      return response.status(404).json({ message: "file not found" });
     }
 
     const updatedFile = await file.findById(id);
-    res.status(200).json(updatedFile);
+    response.status(200).json(updatedFile);
   } catch (error) {
     res.status(500).json({ messege: error.message });
   }
