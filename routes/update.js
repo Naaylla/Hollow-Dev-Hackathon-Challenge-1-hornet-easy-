@@ -38,7 +38,7 @@ router.put("/:id", async (request, response) => {
     const updatedFile = await file.findById(id);
     response.status(200).json(updatedFile);
   } catch (error) {
-    res.status(500).json({ messege: error.message });
+    response.status(500).json({ messege: error.message });
   }
 });
 
@@ -50,7 +50,7 @@ router.get("/", (request, response) => {
     message:
       "To update your information or download a file, please use Postman.",
     instructions: [
-      "Specify the ID in the path as follows: update/info/:id",
+      "Specify the ID in the path as follows: update/:id",
       "Update your request body with JSON in the following format:",
       {
         name: "",
@@ -66,7 +66,7 @@ router.get("/", (request, response) => {
   });
 });
 
-router.put("/info/:id", async (request, response) => {
+router.put("/:id", async (request, response) => {
   try {
     const { id } = request.params;
 
